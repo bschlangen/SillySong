@@ -51,31 +51,26 @@ let bananaFanaTemplate = [
  ******************************************************************/
 func shortNameFromName(name: String) -> String {
     var vowels = "aeiou"
-    var modName = name
+    var modName = name.lowercased()
     
-    // Always remove first letter
-    modName.remove(at: modName.startIndex)
-    
-    for letter in modName.characters {
-        if vowels.characters.contains(letter) {
-            // return if we hit a vowel
-            return modName
-        }
-        else{
-            // Remove the starting letter
-            modName.remove(at: modName.startIndex)
-        }
-    }
-    
-    // Check for cases where the first letter is the ONLY vowel! (like Amy)
-    if modName.isEmpty {
-        return name.lowercased()
-    }
-    else {
+    // Check if we start with a vowel
+    if vowels.characters.contains(modName[modName.startIndex]){
         return modName
     }
+    else{
+        for letter in modName.characters {
+            if vowels.characters.contains(letter) {
+                // return if we hit a vowel
+                return modName
+            }
+            else{
+                // Remove the starting letter
+                modName.remove(at: modName.startIndex)
+            }
+        }
+    return modName
+    }
 }
-
 /*******************************************************************
  *  Constructs the lyrics by combining a template and a name string
  ******************************************************************/
